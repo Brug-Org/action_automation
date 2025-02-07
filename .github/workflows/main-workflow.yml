@@ -8,6 +8,6 @@ on:
 
 jobs:
   call-reusable-workflow:
-    uses: owner/repo/.github/workflows/reusable-workflow.yml@branch
+    uses: oBrug-Org/action_automation/.github/workflows/reusable-workflow.yml@main
     with:
       prefix: 'TI'
