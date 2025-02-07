@@ -11,6 +11,9 @@ on:
         description: 'Tag do deploy'
         required: true
         type: string
+        
+permissions:
+  contents: write  # Adiciona permissão de escrita para o conteúdo
 
 jobs:
   update-wiki:
