@@ -50,8 +50,13 @@ jobs:
             fi
           else
             echo "Adding new entry for $ambiente with tag $tag"
-            echo "# $ambiente / $tag" >> Home.md
+            echo -e "\n# $ambiente / $tag" >> Home.md
           fi
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add Home.md
+          git commit -m "Update $ambiente with tag $tag"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           git add Home.md
