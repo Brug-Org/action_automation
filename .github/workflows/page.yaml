@@ -1,0 +1,18 @@
+name: Print Wiki Page Content
+
+on:
+  workflow_dispatch:
+
+jobs:
+  print-wiki-content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Wiki
+        run: |
+          git clone https://github.com/${{ github.repository }}.wiki.git
+          cd $(basename ${{ github.repository }}.wiki)
+      
+      - name: Print Wiki Page Content
+        run: |
+          cd $(basename ${{ github.repository }}.wiki)
+          cat Home.md
