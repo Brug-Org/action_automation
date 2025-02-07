@@ -38,6 +38,7 @@ jobs:
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
 
   run-matrix-jobs:
+    name: ""
     needs: list-validate-create-matrix
     runs-on: ubuntu-latest
     strategy:
