@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  call-reusable-workflow:
+  deploy:
     uses: Brug-Org/action_automation/.github/workflows/reusable-workflow.yml@main
     with:
       prefix: 'ti'
