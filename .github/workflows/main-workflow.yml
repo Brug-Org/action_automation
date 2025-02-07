@@ -1,0 +1,12 @@
+name: Main Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-reusable-workflow:
+    uses: owner/repo/.github/workflows/reusable-workflow.yml@branch
+    with:
+      prefix: 'TI'
