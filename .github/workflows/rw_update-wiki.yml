@@ -34,6 +34,8 @@ jobs:
           cd $(basename ${{ github.repository }}.wiki)
           ambiente=${{ inputs.ambiente }}
           tag=${{ inputs.tag }}
+          echo "Ambiente: $ambiente"
+          echo "Tag: $tag"
           if [ ! -f Home.md ]; then
             echo "# Últimos Deploys" > Home.md
             echo "## Usando Tabelas com Emojis" >> Home.md
@@ -42,10 +44,15 @@ jobs:
           fi
           if grep -q "| **$ambiente** |" Home.md; then
             current_tag=$(grep "| **$ambiente** |" Home.md | awk -F'|' '{print $3}' | xargs)
+            echo "Current tag for $ambiente: $current_tag"
             if [ "$current_tag" != "**$tag**" ]; then
+              echo "Updating tag for $ambiente from $current_tag to $tag"
               sed -i "s/| **$ambiente** | **$current_tag** |/| **$ambiente** | **$tag** |/" Home.md
+            else
+              echo "Tag for $ambiente is already $tag, no update needed"
             fi
           else
+            echo "Adding new entry for $ambiente with tag $tag"
             echo "| **$ambiente** | **$tag** |" >> Home.md
           fi
           git config --global user.name 'github-actions'
