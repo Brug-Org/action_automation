@@ -36,14 +36,11 @@ jobs:
           tag=${{ inputs.tag }}
           if [ ! -f Home.md ]; then
             echo "# Últimos Deploys" > Home.md
-            echo "| 🌍 Ambiente   | 🔖 Tag       |" >> Home.md
+            echo "| � Ambiente   | �️ Tag       |" >> Home.md
             echo "|---------------|--------------|" >> Home.md
           fi
           if grep -q "| **$ambiente** |" Home.md; then
-            current_tag=$(grep "| **$ambiente** |" Home.md | awk '{print $4}')
-            if [ "$current_tag" != "**$tag**" ]; then
-              sed -i "s/| **$ambiente** | **$current_tag** |/| **$ambiente** | **$tag** |/" Home.md
-            fi
+            sed -i "s/| **$ambiente** | **.*** |/| **$ambiente** | **$tag** |/" Home.md
           else
             echo "| **$ambiente** | **$tag** |" >> Home.md
           fi
