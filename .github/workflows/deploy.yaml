@@ -5,13 +5,10 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Call reusable workflow
-        uses: ./.github/workflows/rw_update-wiki.yml
-        with:
-          ambiente: 'dev'
-          tag: 'release-1.34.5'
+    uses: Brug-Org/action_automation/.github/workflows/rw_update-wiki.yml@main
+    with:
+      ambiente: 'dev'
+      tag: 'release-1.34.5'
 
   # print-wiki-content:
   #   runs-on: ubuntu-latest
