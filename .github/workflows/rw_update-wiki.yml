@@ -54,11 +54,10 @@ jobs:
           fi
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          git add Home.md
-          git commit -m "Update $ambiente with tag $tag"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git add Home.md
-          git commit -m "Update $ambiente with tag $tag"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
+          if [ -n "$(git status --porcelain)" ]; then
+            git add Home.md
+            git commit -m "Update $ambiente with tag $tag"
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
+          else
+            echo "No changes to commit"
+          fi
