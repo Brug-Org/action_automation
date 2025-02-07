@@ -41,7 +41,7 @@ jobs:
             echo "|---------------|--------------|" >> Home.md
           fi
           if grep -q "| **$ambiente** |" Home.md; then
-            sed -i "s/| **$ambiente** | **.*** |/| **$ambiente** | **$tag** |/" Home.md
+            awk -v ambiente="$ambiente" -v tag="$tag" 'BEGIN {FS=OFS="|"} {if ($2 ~ ambiente) $3=" **" tag "** "; print}' Home.md > temp.md && mv temp.md Home.md
           else
             echo "| **$ambiente** | **$tag** |" >> Home.md
           fi
