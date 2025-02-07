@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call reusable workflow
-        uses: ./.github/workflows/update-wiki.yml
+        uses: Brug-Org/action_automation/.github/workflows/update-wiki.yml@main
         with:
           ambiente: 'ti-lado-b'
           tag: 'release-1.34.5'
