@@ -27,7 +27,7 @@ jobs:
           prefix=${{ inputs.prefix }}
           valid_envs=$(jq -r '.environments[].name' environments.json | grep "^$prefix")
           echo "Environments válidos: $valid_envs"
-          echo "::set-output name=valid_envs::$valid_envs"
+          echo "valid_envs=$valid_envs" >> $GITHUB_ENV
 
       # - name: Validar variáveis de ambiente
       #   id: validate-env
@@ -44,7 +44,7 @@ jobs:
         id: set-matrix
         run: |
           matrix=$(echo "${{ steps.validate-envs.outputs.valid_envs }}" | jq -R -s -c 'split("\n")[:-1]')
-          echo "::set-output name=matrix::$matrix"
+          echo "matrix=$matrix" >> $GITHUB_OUTPUT
 
       # - name: Criar matrix
       #   id: set-matrix
