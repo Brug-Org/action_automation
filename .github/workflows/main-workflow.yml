@@ -10,4 +10,4 @@ jobs:
   call-reusable-workflow:
     uses: Brug-Org/action_automation/.github/workflows/reusable-workflow.yml@main
     with:
-      prefix: 'TI'
+      prefix: 'ti'
