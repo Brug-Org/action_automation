@@ -36,11 +36,17 @@ jobs:
           tag=${{ inputs.tag }}
           if [ ! -f Home.md ]; then
             echo "# Últimos Deploys" > Home.md
+            echo "## Usando Tabelas com Emojis" >> Home.md
+            echo "| � Ambiente   | �️ Tag       |" >> Home.md
+            echo "|---------------|--------------|" >> Home.md
           fi
-          if grep -q "^# $ambiente " Home.md; then
-            sed -i "/^# $ambiente /c\# $ambiente / $tag" Home.md
+          if grep -q "| **$ambiente** |" Home.md; then
+            current_tag=$(grep "| **$ambiente** |" Home.md | awk '{print $4}')
+            if [ "$current_tag" != "**$tag**" ]; then
+              sed -i "s/| **$ambiente** | **$current_tag** |/| **$ambiente** | **$tag** |/" Home.md
+            fi
           else
-            echo "# $ambiente / $tag" >> Home.md
+            echo "| **$ambiente** | **$tag** |" >> Home.md
           fi
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
