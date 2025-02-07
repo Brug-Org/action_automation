@@ -27,7 +27,9 @@ jobs:
         run: |
           prefix=${{ inputs.prefix }}
           valid_envs=$(jq -r '.environments[].name' environments.json | grep "^$prefix")
-          echo "valid_envs=$valid_envs" >> $GITHUB_ENV
+          echo "valid_envs<<EOF" >> $GITHUB_ENV
+          echo "$valid_envs" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       - name: Criar matrix
         id: set-matrix
