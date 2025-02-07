@@ -26,7 +26,14 @@ jobs:
           cd $(basename ${{ github.repository }}.wiki)
           ambiente=${{ inputs.ambiente }}
           tag=${{ inputs.tag }}
-          sed -i "/^# $ambiente /c\# $ambiente / $tag" home.md
+          if [ ! -f home.md ]; then
+            echo "# Últimos Deploys" > home.md
+          fi
+          if grep -q "^# $ambiente " home.md; then
+            sed -i "/^# $ambiente /c\# $ambiente / $tag" home.md
+          else
+            echo "# $ambiente / $tag" >> home.md
+          fi
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           git add home.md
