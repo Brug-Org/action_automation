@@ -1,0 +1,41 @@
+name: Reusable Workflow
+
+on:
+  workflow_call:
+    inputs:
+      prefix:
+        required: true
+        type: string
+
+jobs:
+  validate-and-create-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Validar variáveis de ambiente
+        id: validate-env
+        run: |
+          for var in $(printenv); do
+            if [[ $var == ${{ inputs.prefix }}* ]]; then
+              echo "Variável válida: $var"
+            else
+              echo "Variável inválida: $var"
+            fi
+          done
+
+      - name: Criar matrix
+        id: set-matrix
+        run: |
+          matrix=$(printenv | grep '^${{ inputs.prefix }}' | cut -d= -f1 | jq -R -s -c 'split("\n")[:-1]')
+          echo "::set-output name=matrix::$matrix"
+
+  run-matrix-jobs:
+    needs: validate-and-create-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env_var: ${{ fromJson(needs.validate-and-create-matrix.outputs.matrix) }}
+    steps:
+      - name: Usar variável de ambiente
+        run: echo "Usando a variável ${{ matrix.env_var }}"
