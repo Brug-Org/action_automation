@@ -2,7 +2,10 @@ name: Deploy
 
 on:
   workflow_dispatch:
-
+  
+permissions:
+  contents: write  # Adiciona permissão de escrita para o conteúdo
+  
 jobs:
   deploy:
     uses: Brug-Org/action_automation/.github/workflows/rw_update-wiki.yml@main
