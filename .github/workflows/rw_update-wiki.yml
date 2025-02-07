@@ -20,7 +20,12 @@ jobs:
         run: |
           git clone https://github.com/${{ github.repository }}.wiki.git
           cd $(basename ${{ github.repository }}.wiki)
-      
+          
+      - name: Print Wiki Page Content
+        run: |
+          cd $(basename ${{ github.repository }}.wiki)
+          cat Home.md
+          
       - name: Update Wiki Page
         run: |
           cd $(basename ${{ github.repository }}.wiki)
@@ -38,4 +43,4 @@ jobs:
           git config --global user.email 'github-actions@github.com'
           git add Home.md
           git commit -m "Update $ambiente with tag $tag"
-          git push
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
