@@ -63,4 +63,3 @@ jobs:
         run: echo "Usando o Environment ${{ matrix.env_name }}"
     environment:
       name: ${{ matrix.env_name }}
-      url: ${{ secrets.ENVIRONMENT_URL }}
