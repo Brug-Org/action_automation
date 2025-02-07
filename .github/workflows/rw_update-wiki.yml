@@ -36,6 +36,7 @@ jobs:
           tag=${{ inputs.tag }}
           if [ ! -f Home.md ]; then
             echo "# Últimos Deploys" > Home.md
+            echo "## Usando Tabelas com Emojis" >> Home.md
             echo "| � Ambiente   | �️ Tag       |" >> Home.md
             echo "|---------------|--------------|" >> Home.md
           fi
