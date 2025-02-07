@@ -11,7 +11,7 @@ jobs:
     uses: Brug-Org/action_automation/.github/workflows/rw_update-wiki.yml@main
     with:
       ambiente: 'dev'
-      tag: 'release-2.39.5'
+      tag: 'release-2.36.5'
 
   # print-wiki-content:
   #   runs-on: ubuntu-latest
