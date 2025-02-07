@@ -26,16 +26,16 @@ jobs:
           cd $(basename ${{ github.repository }}.wiki)
           ambiente=${{ inputs.ambiente }}
           tag=${{ inputs.tag }}
-          if [ ! -f home.md ]; then
-            echo "# Últimos Deploys" > home.md
+          if [ ! -f Home.md ]; then
+            echo "# Últimos Deploys" > Home.md
           fi
-          if grep -q "^# $ambiente " home.md; then
-            sed -i "/^# $ambiente /c\# $ambiente / $tag" home.md
+          if grep -q "^# $ambiente " Home.md; then
+            sed -i "/^# $ambiente /c\# $ambiente / $tag" Home.md
           else
-            echo "# $ambiente / $tag" >> home.md
+            echo "# $ambiente / $tag" >> Home.md
           fi
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          git add home.md
+          git add Home.md
           git commit -m "Update $ambiente with tag $tag"
           git push
