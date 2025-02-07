@@ -9,6 +9,7 @@ on:
 
 jobs:
   list-validate-create-matrix:
+    name: ""
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
