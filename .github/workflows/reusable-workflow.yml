@@ -9,7 +9,7 @@ on:
 
 jobs:
   list-validate-create-matrix:
-    name: ""
+    name: " "
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -38,7 +38,7 @@ jobs:
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
 
   run-matrix-jobs:
-    name: ""
+    name: " "
     needs: list-validate-create-matrix
     runs-on: ubuntu-latest
     strategy:
