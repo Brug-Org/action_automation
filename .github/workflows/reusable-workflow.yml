@@ -1,4 +1,4 @@
-name: Reusable Workflow
+name: Cria e roda matrix
 
 on:
   workflow_call:
